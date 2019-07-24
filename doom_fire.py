@@ -2,10 +2,10 @@ import numpy as np
 import random
 import pygame
 
-sizePixel = 10
+sizePixel = 4
 
-fireWidth = 30
-fireHeight = 40
+fireWidth = 100
+fireHeight = 100
 
 debug = False
 
@@ -31,7 +31,7 @@ def start():
                 pygame.quit()
                 exit()
         # Number of frames per secong e.g. 60
-        # clock.tick(20)
+        clock.tick(60)
         pygame.display.update()
         calculateFirePropagation()
 
@@ -50,17 +50,20 @@ def updateFireIntensity(currentRow, currentColumn):
     if currentRow >= fireHeight:
         return
     decay = int(random.random()*3)
+    randomColumn = int(random.randint(0, 3))
     belowPixelFireIntensity = firePixels[currentRow + 1, currentColumn]
     if belowPixelFireIntensity - decay >= 0:
         newFireIntensity = belowPixelFireIntensity - decay
     else:
         newFireIntensity = 0
 
-    if currentRow - decay >= 0:
-        firePixels[currentRow, currentColumn - decay] = newFireIntensity
+    if currentRow - randomColumn >= 0:
+        if currentColumn + randomColumn > fireWidth:
+            firePixels[currentRow, currentColumn - randomColumn] = newFireIntensity
+        else:
+            firePixels[currentRow, currentColumn + randomColumn - 1] = newFireIntensity
     else:
-        firePixels[0, 0] = newFireIntensity
-
+        firePixels[currentRow, currentColumn] = newFireIntensity
 def renderFire():
     if debug:
         debugSize = 40
