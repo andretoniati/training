@@ -3,7 +3,7 @@ import csv
 from random import randint
 import datetime
 
-path = 'C:/Users/andre.toniati/Documents/TRAINEE KEYRUS2019/py-training/class-exercise/'
+path = ''
 path_contas = path + 'contas/'
 path_bancos =  path + 'bancos/'
 
