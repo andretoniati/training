@@ -88,7 +88,7 @@ def cria_conta(nome):
              "saldo": saldo,\
              "limite": limite
             }
-    key_cliente = conta['numero'].replace('-','')
+    key_cliente = nome + '_' + conta['numero'].replace('-','')
     clientes[key_cliente] = Cliente(
                                     conta['numero'],
                                     conta['titular'],
@@ -125,7 +125,7 @@ class Banco:
         banco = le_banco(full_path_bancos)
         
         for cliente in banco:
-            key_cliente = cliente['numero'].replace('-','')
+            key_cliente = nome + '_' + conta['numero'].replace('-','')
             clientes[key_cliente] = Cliente(
                                     cliente['numero'],
                                     cliente['titular'],
